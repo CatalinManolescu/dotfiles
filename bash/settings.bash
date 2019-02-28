@@ -13,4 +13,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-bind 'set bell-style none'
+if [[ $- == *i* ]]; then
+  bind 'set bell-style none'
+fi
