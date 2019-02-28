@@ -12,3 +12,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+bind 'set bell-style none'
