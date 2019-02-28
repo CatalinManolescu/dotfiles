@@ -1,0 +1,68 @@
+[alias]
+	st = status -sb
+	versions = tag -l --sort=version:refname
+	update-submodules = submodule update --init --recursive
+	upgrade-submodules = submodule update --init --remote
+	tar = ! "tar() { git archive --format tar --prefix=\"${PWD##*/}/\" HEAD -o ${1}; }; tar"
+	targz = ! "targz() { git archive --format tar.gz --prefix=\"${PWD##*/}/\" HEAD -o ${1}; }; targz"
+	zip = ! "zip() { git archive --format zip --prefix=\"${PWD##*/}/\" HEAD -o ${1}; }; zip"
+
+[diff]
+	mnemonicPrefix = true
+	wordRegex = "[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+"
+	compactionHeuristic = true
+
+[color]
+	ui = auto
+
+[color "grep"]
+	match = cyan bold
+	selected = blue
+	context = normal
+	filename = magenta
+	linenumber = green
+	separator = yellow
+	function = blue
+
+[pretty]
+	line = "%C(auto)%h%d %s %C(yellow)by %C(blue)%an %C(green)%ar"
+	compact = "%C(auto)%h %s %C(green)%ar%n %C(auto)%d%n"
+	detail = "%C(auto)%h %s%n  %C(yellow)by %C(blue)%an %C(magenta)<%ae> [%G?] %C(green)%ar%n %C(auto)%d%n"
+
+[merge]
+	defaultToUpstream = true
+	tool = vimdiff
+
+[pull]
+	#ff = only
+
+[mergetool]
+	keepBackup = false
+
+[push]
+	default = upstream
+
+[credential]
+	helper = cache --timeout=3600
+
+[grep]
+	lineNumber = true
+
+[advice]
+	detachedHead = false
+	waitingForEditor = false
+
+[user]
+	useConfigOnly = true
+    name = Catalin Manolescu
+    email = cc.manolescu@gmail.com
+    
+[http]
+	cookieFile = ~/.gitcookies
+
+[core]
+	excludesfile = ~/.gitignore_global
+
+# Allow local customizations in the .gitconfig_local file
+[include]
+	path = ~/.gitconfig_local
