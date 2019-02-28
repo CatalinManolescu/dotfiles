@@ -9,7 +9,7 @@
     ~/.bash:
     ~/.bash_profile:
     ~/.bashrc:
-    ~/.dotfiles: ''
+    # ~/.dotfiles: ''
     ~/.gitconfig:
     ~/.gnupg/gpg.conf:
     ~/.shell:
