@@ -1,4 +1,4 @@
-[submodule "dotbot"]
+[submodule ".dotbot"]
 	path = .dotbot
 	url = https://github.com/anishathalye/dotbot
 [submodule "vim/bundle/vim-colors-solarized"]
@@ -25,7 +25,7 @@
 	path = vim/bundle/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim
 	ignore = untracked
-[submodule "zsh/plugins/dircolors-solarized"]
+[submodule "shell/plugins/dircolors-solarized"]
 	path = shell/plugins/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
 [submodule "zsh/plugins/zsh-syntax-highlighting"]
