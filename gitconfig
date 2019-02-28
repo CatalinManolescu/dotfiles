@@ -1,6 +1,8 @@
 [alias]
 	st = status -sb
 	versions = tag -l --sort=version:refname
+	info = ! "inf() { if git rev-parse ${1} >/dev/null 2>&1; then git cat-file -p $(git rev-parse ${1}); else echo Invalid object; fi }; inf"
+	cleanall = clean -fdx # this is dangerous, so it's intentionally long to type
 	update-submodules = submodule update --init --recursive
 	upgrade-submodules = submodule update --init --remote
 	tar = ! "tar() { git archive --format tar --prefix=\"${PWD##*/}/\" HEAD -o ${1}; }; tar"
