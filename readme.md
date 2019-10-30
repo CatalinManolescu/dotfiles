@@ -11,3 +11,9 @@ Based on [https://github.com/anishathalye/dotfiles](https://github.com/anishatha
 - `zsh` / `bash` : `~/.shell_local_after` run last
 - `git` : `~/.gitconfig_local`
 - `tmux` : `~/.tmux_local.conf`
+
+## dependencies
+
+### enable mouse copy
+
+For mouse copy you need to install `xclip` and `xsel` .
