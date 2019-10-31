@@ -17,3 +17,5 @@ Based on [https://github.com/anishathalye/dotfiles](https://github.com/anishatha
 ### enable mouse copy
 
 For mouse copy you need to install `xclip` and `xsel` .
+
+NOTE: in order to copy the selected text to clipboard you need to press the return key (before releasing the mouse buttton).
