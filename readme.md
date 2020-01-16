@@ -43,8 +43,6 @@ tmux ls                                 # list available sessions
 tmux kill-session -t <session-name>     # kill session
 ```
 
-Start new session with a specific name (or connect to existing session)
-
 ### sessions
 
 ```text
