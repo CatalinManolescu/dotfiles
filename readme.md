@@ -32,6 +32,34 @@ NOTE: please change the git user name and email :)
 
 ## commands
 
+### List tags for a docker image available on Docker hub 
+    
+```bash
+dtags <image> [<filter-key>[+<filter-key>[..]]] 
+```    
+
+Examples:
+
+  - list all tags for nodejs
+    
+    ```bash
+    dtags node
+    ```
+    
+  - list all tags for nodejs that contain the key 'alpine' and 'lts'
+    
+    ```bash
+    dtags node alpine+lts
+    ```
+
+### git status
+
+```bash
+git st
+```
+
+## tmux commands
+
 Tmux prefix is `ctrl + a`
 
 ```bash
