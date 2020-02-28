@@ -42,11 +42,15 @@ else
 endif
 
 filetype plugin indent on " enable file type detection
-set autoindent
+set noautoindent
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
 
 "---------------------
 " Basic editing config
 "---------------------
+set paste
 set shortmess=I " disable startup message
 set nu " number lines
 set rnu " relative line numbering
@@ -122,9 +126,6 @@ nnoremap <Leader>f :NERDTreeFind<CR>
 " buffergator
 let g:buffergator_suppress_keymaps = 1
 nnoremap <Leader>b :BuffergatorToggle<CR>
-
-" tagbar
-nnoremap <Leader>t :TagbarToggle<CR>
 
 " gundo
 nnoremap <Leader>u :GundoToggle<CR>
