@@ -232,11 +232,11 @@ function PR_EXTRA() {
 # Prompt
 function PCMD() {
     if (( PROMPT_MODE == 0 )); then
-        echo "$(PR_EXTRA)$(PR_DIR) $(PR_ERROR)$(PR_ARROW) " # space at the end
+        echo "$(RPR_INFO) $(PR_EXTRA)$(PR_DIR) $(RCMD)\n$(PR_ERROR)$(PR_ARROW) " # space at the end
     elif (( PROMPT_MODE == 1 )); then
-        echo "$(PR_EXTRA)$(PR_DIR 1) $(PR_ERROR)$(PR_ARROW) " # space at the end
+        echo "$(RPR_INFO) $(PR_EXTRA)$(PR_DIR 1) $(RCMD)\n$(PR_ERROR)$(PR_ARROW) " # space at the end
     else
-        echo "$(PR_EXTRA)$(PR_ERROR)$(PR_ARROW) " # space at the end
+        echo "$(RPR_INFO) $(PR_EXTRA) $(RCMD)\n$(PR_ERROR)$(PR_ARROW) " # space at the end
     fi
 }
 
@@ -250,7 +250,7 @@ function RPR_EXTRA() {
 # Right-hand prompt
 function RCMD() {
     if (( PROMPT_MODE == 0 )); then
-        echo "$(RPR_INFO)$(git_prompt_string)$(RPR_EXTRA)"
+        echo "$(git_prompt_string)$(RPR_EXTRA)"
     elif (( PROMPT_MODE <= 2 )); then
         echo "$(git_prompt_string)$(RPR_EXTRA)"
     else
@@ -262,7 +262,8 @@ ASYNC_PROC=0
 function precmd() {
     function async() {
         # save to temp file
-        printf "%s" "$(RCMD)" > "/tmp/zsh_prompt_$$"
+        # printf "%s" "$(RCMD)" > "/tmp/zsh_prompt_$$"
+        printf "%s" > "/tmp/zsh_prompt_$$"
 
         # signal parent
         kill -s USR1 $$
