@@ -12,6 +12,26 @@ Based on [https://github.com/anishathalye/dotfiles](https://github.com/anishatha
 - `git` : `~/.gitconfig_local`
 - `tmux` : `~/.tmux_local.conf`
 
+### zsh config
+
+**Hide user in prompt**
+
+```bash
+export RPR_SHOW_USER=false
+```
+
+**Hide hostname in prompt**
+
+```bash
+export RPR_SHOW_HOST=false
+```
+
+**Change arrow char in prompt**
+
+```bash
+export PR_ARROW_CHAR='>'
+```
+
 ## dependencies
 
 ### enable mouse copy
@@ -32,22 +52,22 @@ NOTE: please change the git user name and email :)
 
 ## commands
 
-### List tags for a docker image available on Docker hub 
-    
+### List tags for a docker image available on Docker hub
+
 ```bash
-dtags <image> [<filter-key>[+<filter-key>[..]]] 
-```    
+dtags <image> [<filter-key>[+<filter-key>[..]]]
+```
 
 Examples:
 
   - list all tags for nodejs
-    
+
     ```bash
     dtags node
     ```
-    
+
   - list all tags for nodejs that contain the key 'alpine' and 'lts'
-    
+
     ```bash
     dtags node alpine+lts
     ```
@@ -64,7 +84,7 @@ Tmux prefix is `ctrl + a`
 
 ```bash
 tmx                                     # start tmux and create new session
-tmx <session-name>                      # start tmux and create new session and link to specified session  
+tmx <session-name>                      # start tmux and create new session and link to specified session
 tmux a                                  # start tmux and attach to running session
 tmux a -t <session-name>                # start tmux and attach to specified session
 tmux ls                                 # list available sessions
@@ -101,7 +121,7 @@ q                         # show pane numbers
 !                         # convert pane into window
 x                         # kill pane
 <space>                   # toggle between layouts
-:setw synchronize-panes   # toggle pane synchronize (or use 'on' or 'off' to make it specific)  
+:setw synchronize-panes   # toggle pane synchronize (or use 'on' or 'off' to make it specific)
 ```
 
 ### misc
@@ -111,7 +131,7 @@ x                         # kill pane
 :                         # prompt
 ```
 
-More commands at 
+More commands at
 
 - [https://tmuxcheatsheet.com/](https://tmuxcheatsheet.com/)
 - <https://gist.github.com/MohamedAlaa/2961058>
