@@ -70,3 +70,11 @@ dptags () {
     curl -s https://registry.hub.docker.com/v2/repositories/${image}/tags | jq -r "[\"tags\",\"size\"],[\"====\",\"====\"],(.results[]${filter} | [.name,(.images[].size/1024/1024)]) | @tsv" | awk 'BEGIN{ FS=OFS="\t" }NR>2{ $2=sprintf("%.2f",$2) }1'
   fi
 }
+
+dns_to_ip() {
+  for domain in "$@"; do
+    for ip in `nslookup $domain | tail -n +3 | sed -n 's/Address:\s*//p'`;do
+      echo -n "$ip "
+    done
+  done
+}
