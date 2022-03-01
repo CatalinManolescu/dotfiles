@@ -12,6 +12,20 @@ path_prepend() {
     PATH="$1${PATH:+":$PATH"}"
 }
 
+random_char() {
+  chars='@#$%&_+=!'
+  echo -n ${chars:$((RANDOM % ${#chars})):1}
+}
+
+random_numbers() {
+  echo -n $(< /dev/urandom LC_ALL=C tr -dc 0-9 | head -c$1)
+}
+
+random_password() {
+  echo "$(($1-2))"
+  echo -n $(< /dev/urandom LC_ALL=C tr -dc [:upper:][:lower:] | head -c$(($1-2)) | echo "$(xargs)$(random_char)$(random_numbers 1)" | fold -w1 | shuf | tr -d '\n')
+}
+
 dtags_help() {
   echo " 
     List tags for a docker image available on Docker hub 
