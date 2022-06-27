@@ -1,34 +1,229 @@
-[submodule ".dotbot"]
+[submodule "dotbot"]
 	path = .dotbot
 	url = https://github.com/anishathalye/dotbot
-[submodule "vim/bundle/vim-pathogen"]
-	path = vim/bundle/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen.git
+	ignore = dirty
 [submodule "vim/bundle/vim-colors-solarized"]
-	path = vim/bundle/vim-colors-solarized
+	path = vim/pack/vendor/start/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
 	ignore = untracked
+[submodule "vim/bundle/vim-scala"]
+	path = vim/pack/vendor/start/vim-scala
+	url = https://github.com/derekwyatt/vim-scala.git
+	ignore = untracked
 [submodule "vim/bundle/vim-markdown"]
-	path = vim/bundle/vim-markdown
+	path = vim/pack/vendor/start/vim-markdown
 	url = https://github.com/tpope/vim-markdown
 	ignore = untracked
-[submodule "vim/bundle/vim-tmux"]
-	path = vim/bundle/vim-tmux
-	url = https://github.com/tmux-plugins/vim-tmux
+[submodule "vim/bundle/vim-git"]
+	path = vim/pack/vendor/start/vim-git
+	url = https://github.com/tpope/vim-git.git
 	ignore = untracked
 [submodule "vim/bundle/vim-javascript"]
-	path = vim/bundle/vim-javascript
+	path = vim/pack/vendor/start/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
 	ignore = untracked
-[submodule "vim/bundle/vim-less"]
-	path = vim/bundle/vim-less
-	url = https://github.com/groenewege/vim-less
+[submodule "vim/bundle/vim-fugitive"]
+	path = vim/pack/vendor/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+	ignore = untracked
+[submodule "vim/bundle/ctrlp.vim"]
+	path = vim/pack/vendor/start/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim
+	ignore = untracked
+[submodule "vim/bundle/vim-bundler"]
+	path = vim/pack/vendor/start/vim-bundler
+	url = https://github.com/tpope/vim-bundler.git
+	ignore = untracked
+[submodule "vim/bundle/vim-coffee-script"]
+	path = vim/pack/vendor/start/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script
+	ignore = untracked
+[submodule "vim/bundle/vim-surround"]
+	path = vim/pack/vendor/start/vim-surround
+	url = https://github.com/tpope/vim-surround
+	ignore = untracked
+[submodule "vim/bundle/vim-json"]
+	path = vim/pack/vendor/start/vim-json
+	url = https://github.com/elzr/vim-json
+	ignore = untracked
+[submodule "vim/bundle/webapi-vim"]
+	path = vim/pack/vendor/start/webapi-vim
+	url = https://github.com/mattn/webapi-vim
+	ignore = untracked
+[submodule "vim/bundle/gist-vim"]
+	path = vim/pack/vendor/start/gist-vim
+	url = https://github.com/mattn/gist-vim.git
+	ignore = untracked
+[submodule "vim/bundle/gundo.vim"]
+	path = vim/pack/vendor/start/gundo.vim
+	url = https://github.com/sjl/gundo.vim
+	ignore = untracked
+[submodule "vim/bundle/vim-liquid"]
+	path = vim/pack/vendor/start/vim-liquid
+	url = https://github.com/tpope/vim-liquid
+	ignore = untracked
+[submodule "vim/bundle/supertab"]
+	path = vim/pack/vendor/start/supertab
+	url = https://github.com/ervandew/supertab
+	ignore = untracked
+[submodule "vim/bundle/editorconfig-vim"]
+	path = vim/pack/vendor/start/editorconfig-vim
+	url = https://github.com/editorconfig/editorconfig-vim
+	ignore = untracked
+[submodule "vim/bundle/rust.vim"]
+	path = vim/pack/vendor/start/rust.vim
+	url = https://github.com/wting/rust.vim
+	ignore = untracked
+[submodule "vim/bundle/vim-tmux"]
+	path = vim/pack/vendor/start/vim-tmux
+	url = https://github.com/tmux-plugins/vim-tmux
+	ignore = untracked
+[submodule "vim/bundle/haskell-vim"]
+	path = vim/pack/vendor/start/haskell-vim
+	url = https://github.com/neovimhaskell/haskell-vim
+	ignore = untracked
+[submodule "vim/bundle/ack.vim"]
+	path = vim/pack/vendor/start/ack.vim
+	url = https://github.com/mileszs/ack.vim
+	ignore = untracked
+[submodule "vim/bundle/syntastic"]
+	path = vim/pack/vendor/start/syntastic
+	url = https://github.com/scrooloose/syntastic
+	ignore = untracked
+[submodule "vim/bundle/vim-signature"]
+	path = vim/pack/vendor/start/vim-signature
+	url = https://github.com/kshenoy/vim-signature
+	ignore = untracked
+[submodule "vim/bundle/nerdtree"]
+	path = vim/pack/vendor/start/nerdtree
+	url = https://github.com/scrooloose/nerdtree
+	ignore = untracked
+[submodule "vim/bundle/incsearch.vim"]
+	path = vim/pack/vendor/start/incsearch.vim
+	url = https://github.com/haya14busa/incsearch.vim
+	ignore = untracked
+[submodule "vim/bundle/vim-easymotion"]
+	path = vim/pack/vendor/start/vim-easymotion
+	url = https://github.com/easymotion/vim-easymotion
+	ignore = untracked
+[submodule "vim/bundle/incsearch-easymotion.vim"]
+	path = vim/pack/vendor/start/incsearch-easymotion.vim
+	url = https://github.com/haya14busa/incsearch-easymotion.vim
+	ignore = untracked
+[submodule "vim/bundle/vim-argwrap"]
+	path = vim/pack/vendor/start/vim-argwrap
+	url = https://github.com/FooSoft/vim-argwrap
+	ignore = untracked
+[submodule "vim/bundle/nerdcommenter"]
+	path = vim/pack/vendor/start/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter
+	ignore = untracked
+[submodule "vim/bundle/vim-vagrant"]
+	path = vim/pack/vendor/start/vim-vagrant
+	url = https://github.com/hashivim/vim-vagrant
 	ignore = untracked
 [submodule "vim/bundle/typescript-vim"]
-	path = vim/bundle/typescript-vim
+	path = vim/pack/vendor/start/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim
 	ignore = untracked
-[submodule "shell/plugins/dircolors-solarized"]
+[submodule "vim/bundle/vim-buffergator"]
+	path = vim/pack/vendor/start/vim-buffergator
+	url = https://github.com/jeetsukumaran/vim-buffergator
+	ignore = untracked
+[submodule "vim/bundle/vim-solidity"]
+	path = vim/pack/vendor/start/vim-solidity
+	url = https://github.com/tomlion/vim-solidity
+	ignore = untracked
+[submodule "vim/bundle/lightline.vim"]
+	path = vim/pack/vendor/start/lightline.vim
+	url = https://github.com/itchyny/lightline.vim
+	ignore = untracked
+[submodule "vim/bundle/vim-over"]
+	path = vim/pack/vendor/start/vim-over
+	url = https://github.com/osyo-manga/vim-over
+	ignore = untracked
+[submodule "vim/bundle/smarty.vim"]
+	path = vim/pack/vendor/start/smarty.vim
+	url = https://github.com/blueyed/smarty.vim
+	ignore = untracked
+[submodule "vim/bundle/vim-smt2"]
+	path = vim/pack/vendor/start/vim-smt2
+	url = https://github.com/bohlender/vim-smt2
+	ignore = untracked
+[submodule "vim/bundle/vim-racket"]
+	path = vim/pack/vendor/start/vim-racket
+	url = https://github.com/wlangstroth/vim-racket
+	ignore = untracked
+[submodule "vim/pack/vendor/start/vim-jsx-pretty"]
+	path = vim/pack/vendor/start/vim-jsx-pretty
+	url = https://github.com/MaxMEllon/vim-jsx-pretty
+	ignore = untracked
+[submodule "vim/pack/vendor/start/vim-js"]
+	path = vim/pack/vendor/start/vim-js
+	url = https://github.com/yuezk/vim-js
+	ignore = untracked
+[submodule "vim/pack/vendor/start/vim-toml"]
+	path = vim/pack/vendor/start/vim-toml
+	url = https://github.com/cespare/vim-toml
+[submodule "emacs.d/vendor/use-package"]
+	path = emacs.d/vendor/use-package
+	url = https://github.com/jwiegley/use-package
+[submodule "emacs.d/vendor/PG"]
+	path = emacs.d/vendor/PG
+	url = https://github.com/ProofGeneral/PG
+[submodule "emacs.d/vendor/evil"]
+	path = emacs.d/vendor/evil
+	url = https://github.com/emacs-evil/evil
+[submodule "emacs.d/vendor/editorconfig-emacs"]
+	path = emacs.d/vendor/editorconfig-emacs
+	url = https://github.com/editorconfig/editorconfig-emacs
+[submodule "emacs.d/vendor/emacs-color-theme-solarized"]
+	path = emacs.d/vendor/emacs-color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized
+[submodule "emacs.d/vendor/fiplr"]
+	path = emacs.d/vendor/fiplr
+	url = https://github.com/grizzl/fiplr
+[submodule "emacs.d/vendor/grizzl"]
+	path = emacs.d/vendor/grizzl
+	url = https://github.com/grizzl/grizzl
+[submodule "emacs.d/vendor/packed"]
+	path = emacs.d/vendor/packed
+	url = https://github.com/tarsius/packed
+[submodule "emacs.d/vendor/dash.el"]
+	path = emacs.d/vendor/dash.el
+	url = https://github.com/magnars/dash.el
+[submodule "emacs.d/vendor/auto-compile"]
+	path = emacs.d/vendor/auto-compile
+	url = https://github.com/tarsius/auto-compile
+[submodule "emacs.d/vendor/emacs-neotree"]
+	path = emacs.d/vendor/emacs-neotree
+	url = https://github.com/jaypei/emacs-neotree
+[submodule "emacs.d/vendor/company-mode"]
+	path = emacs.d/vendor/company-mode
+	url = https://github.com/company-mode/company-mode
+[submodule "emacs.d/vendor/linum-relative"]
+	path = emacs.d/vendor/linum-relative
+	url = https://github.com/coldnew/linum-relative
+[submodule "emacs.d/vendor/company-coq"]
+	path = emacs.d/vendor/company-coq
+	url = https://github.com/cpitclaudel/company-coq
+[submodule "emacs.d/vendor/company-math"]
+	path = emacs.d/vendor/company-math
+	url = https://github.com/vspinu/company-math
+[submodule "emacs.d/vendor/math-symbol-lists"]
+	path = emacs.d/vendor/math-symbol-lists
+	url = https://github.com/vspinu/math-symbol-lists
+[submodule "emacs.d/vendor/yasnippet"]
+	path = emacs.d/vendor/yasnippet
+	url = https://github.com/joaotavora/yasnippet
+	ignore = untracked
+[submodule "emacs.d/vendor/avy"]
+	path = emacs.d/vendor/avy
+	url = https://github.com/abo-abo/avy
+[submodule "emacs.d/vendor/evil-easymotion"]
+	path = emacs.d/vendor/evil-easymotion
+	url = https://github.com/PythonNut/evil-easymotion
+[submodule "zsh/plugins/dircolors-solarized"]
 	path = shell/plugins/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
 [submodule "zsh/plugins/zsh-syntax-highlighting"]
@@ -37,7 +232,21 @@
 [submodule "zsh/plugins/zsh-completions"]
 	path = zsh/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions
-[submodule "vim/bundle/vim-coffee-script"]
-	path = vim/bundle/vim-coffee-script
-  url = https://github.com/kchmck/vim-coffee-script.git
-  ignore = untracked
+[submodule "irssi/scripts/vendor/irssi-smartfilter"]
+	path = irssi/scripts/vendor/irssi-smartfilter
+	url = https://github.com/lifeforms/irssi-smartfilter
+[submodule "jupyter/nbextensions/jupyter-vim-binding"]
+	path = jupyter/nbextensions/jupyter-vim-binding
+	url = https://github.com/lambdalisue/jupyter-vim-binding
+[submodule "emacs.d/vendor/racket-mode"]
+	path = emacs.d/vendor/racket-mode
+	url = https://github.com/greghendershott/racket-mode
+[submodule "emacs.d/vendor/evil-surround"]
+	path = emacs.d/vendor/evil-surround
+	url = https://github.com/emacs-evil/evil-surround
+[submodule "emacs.d/vendor/goto-chg"]
+	path = emacs.d/vendor/goto-chg
+	url = https://github.com/emacs-evil/goto-chg
+[submodule "emacs.d/vendor/pos-tip"]
+	path = emacs.d/vendor/pos-tip
+	url = https://github.com/pitkali/pos-tip

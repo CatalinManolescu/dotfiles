@@ -1,12 +1,5 @@
 set nocompatible " not vi compatible
 
-"--------------
-" Load pathogen
-"--------------
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-call pathogen#helptags()
-
 "------------------
 " Syntax and indent
 "------------------
@@ -39,30 +32,26 @@ else
     highlight StatusLineNC cterm=bold ctermfg=245 ctermbg=235
     let g:lightline = {'colorscheme': 'dark'}
     highlight SpellBad cterm=underline
+    " patches
+    highlight CursorLineNr cterm=NONE
 endif
 
 filetype plugin indent on " enable file type detection
-set noautoindent
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
+set autoindent
 
 "---------------------
 " Basic editing config
 "---------------------
-set paste
-set shortmess=I " disable startup message
+set shortmess+=I " disable startup message
 set nu " number lines
 set rnu " relative line numbering
 set incsearch " incremental search (as string is being typed)
 set hls " highlight search
 set listchars=tab:>>,nbsp:~ " set list to see tabs and non-breakable spaces
 set lbr " line break
-set ruler " show current position in file
 set scrolloff=5 " show lines above and below cursor (when possible)
 set noshowmode " hide mode
 set laststatus=2
-set showcmd " show current command
 set backspace=indent,eol,start " allow backspacing over everything
 set timeout timeoutlen=1000 ttimeoutlen=100 " fix slow O inserts
 set lazyredraw " skip redrawing screen in some cases
@@ -72,9 +61,9 @@ set history=8192 " more history
 set nojoinspaces " suppress inserting two spaces between sentences
 " use 4 spaces instead of tabs during formatting
 set expandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 " smart case-sensitive search
 set ignorecase
 set smartcase
@@ -86,6 +75,7 @@ if &term =~ '^screen'
     " tmux knows the extended mouse mode
     set ttymouse=xterm2
 endif
+set nofoldenable " disable folding by default
 
 "--------------------
 " Misc configurations
@@ -108,6 +98,30 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+" movement relative to display lines
+nnoremap <silent> <Leader>d :call ToggleMovementByDisplayLines()<CR>
+function SetMovementByDisplayLines()
+    noremap <buffer> <silent> <expr> k v:count ? 'k' : 'gk'
+    noremap <buffer> <silent> <expr> j v:count ? 'j' : 'gj'
+    noremap <buffer> <silent> 0 g0
+    noremap <buffer> <silent> $ g$
+endfunction
+function ToggleMovementByDisplayLines()
+    if !exists('b:movement_by_display_lines')
+        let b:movement_by_display_lines = 0
+    endif
+    if b:movement_by_display_lines
+        let b:movement_by_display_lines = 0
+        silent! nunmap <buffer> k
+        silent! nunmap <buffer> j
+        silent! nunmap <buffer> 0
+        silent! nunmap <buffer> $
+    else
+        let b:movement_by_display_lines = 1
+        call SetMovementByDisplayLines()
+    endif
+endfunction
 
 " toggle relative numbering
 nnoremap <C-n> :set rnu!<CR>
@@ -138,12 +152,12 @@ nnoremap ; :CtrlPBuffer<CR>
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_show_hidden = 1
 
-" ag
-let g:ag_mapping_message=0
-command -nargs=+ Gag Gcd | Ag! <args>
+" ag / ack.vim
+command -nargs=+ Gag Gcd | Ack! <args>
 nnoremap K :Gag "\b<C-R><C-W>\b"<CR>:cw<CR>
 if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+    let g:ackprg = 'ag --vimgrep'
 endif
 
 " syntastic
@@ -191,7 +205,15 @@ let g:markdown_fenced_languages = [
     \ 'ruby',
     \ 'yaml',
     \ 'go',
+    \ 'racket',
+    \ 'haskell',
+    \ 'rust',
 \]
+let g:markdown_syntax_conceal = 0
+let g:markdown_folding = 1
+
+" fugitive
+set tags^=.git/tags;~
 
 "---------------------
 " Local customizations

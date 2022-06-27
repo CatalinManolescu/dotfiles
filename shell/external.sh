@@ -7,3 +7,9 @@ export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
 
 # Python startup file
 export PYTHONSTARTUP=$HOME/.pythonrc
+
+# Vagrant
+export VAGRANT_DISABLE_VBOXSYMLINKCREATE=1
+
+# Docker
+export DOCKER_SCAN_SUGGEST=false

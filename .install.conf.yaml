@@ -18,6 +18,13 @@
     ~/.vimrc:
     ~/.zsh:
     ~/.zshrc:
+    ~/.irssi:
+    ~/.jupyter/jupyter_notebook_config.py: jupyter/jupyter_notebook_config.py
+    ~/.jupyter/nbconfig/notebook.json: jupyter/notebook.json
+    ~/.local/share/jupyter/nbextensions: jupyter/nbextensions
+    ~/.pythonrc:
+    ~/.emacs.d:
+    ~/.emacs:
 
 - shell:
   - git submodule sync --recursive
@@ -25,6 +32,9 @@
   - git update-submodules
   - >
     git cleanall -f
+    emacs.d/vendor/
+    irssi/scripts/vendor/
+    jupyter/nbextensions/
     shell/plugins/
-    vim/bundle/
+    vim/pack/vendor/start/
     zsh/plugins/
