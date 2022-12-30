@@ -18,24 +18,24 @@ random_char() {
 }
 
 random_numbers() {
-  echo -n $(< /dev/urandom LC_ALL=C tr -dc 0-9 | head -c$1)
+  echo -n $(< /dev/urandom LC_ALL=C tr -dc 0-9 | head -c${1:-1})
 }
 
 random_password() {
-  echo "$(($1-2))"
-  echo -n $(< /dev/urandom LC_ALL=C tr -dc [:upper:][:lower:] | head -c$(($1-2)) | echo "$(xargs)$(random_char)$(random_numbers 1)" | fold -w1 | shuf | tr -d '\n')
+  # echo "$((${1:-3}-2))"
+  echo -n $(LC_ALL=C tr -dc "[:upper:][:lower:]" < /dev/urandom | head -c $((${1:-3}-2)) | (echo -n "$(random_char)$(random_numbers 1)" && cat -) | fold -w1 | shuf | tr -d '\n')
 }
 
 dtags_help() {
-  echo " 
-    List tags for a docker image available on Docker hub 
-    
-    dtags <image> [<filter-key>[+<filter-key>[..]]] 
-    
+  echo "
+    List tags for a docker image available on Docker hub
+
+    dtags <image> [<filter-key>[+<filter-key>[..]]]
+
     Eg.
     - list all tags for nodejs
       /> dtags node
-    
+
     - list all tags for nodejs that contain the key 'alpine' and 'lts'
       /> dtags node alpine+lts
   "
@@ -46,7 +46,7 @@ dtags_filter() {
 
   OIFS=$IFS
   IFS='+'
-  
+
   for filter_value in $1
   do
     if [ -n "$filter" ]; then
@@ -69,7 +69,7 @@ dtags() {
   else
     local image="$1"
     local filter=`dtags_filter $2`
-    
+
     curl -s https://registry.hub.docker.com/v1/repositories/${image}/tags | jq -r ".[]${filter}.name"
   fi
 }
