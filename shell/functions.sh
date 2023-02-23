@@ -63,18 +63,7 @@ dtags_filter() {
   echo "$filter"
 }
 
-dtags() {
-  if [ $# -lt 1 ]; then
-    dtags_help
-  else
-    local image="$1"
-    local filter=`dtags_filter $2`
-
-    curl -s https://registry.hub.docker.com/v1/repositories/${image}/tags | jq -r ".[]${filter}.name"
-  fi
-}
-
-dptags () {
+dtags () {
   if [ $# -lt 1 ]; then
     dtags_help
   else
@@ -92,3 +81,14 @@ dns_to_ip() {
     done
   done
 }
+
+azure_config_dir() {
+  if [ -z "$1" ]; then
+    echo $AZURE_CONFIG_DIR
+  elif [ "$1" = "default" ]; then
+    export AZURE_CONFIG_DIR=`realpath ~/.azure`
+  else 
+   export AZURE_CONFIG_DIR=$1
+  fi
+}
+

@@ -98,6 +98,7 @@ tmux kill-session -t <session-name>     # kill session
 s                        # list sessions
 $                        # rename session
 d                        # detach
+:attach -c path          # set session working directory (used for new windows) 
 ```
 
 ### windows
