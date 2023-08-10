@@ -93,5 +93,5 @@ azure_config_dir() {
 }
 
 myip() {
-  dig +short myip.opendns.com @resolver1.opendns.com
+  dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | awk -F'"' '{ print $2}'
 }
