@@ -103,12 +103,14 @@ function machine_name() {
     fi
 }
 
+PROMPT_PYTHON="$(command -v python || command -v python3 || command -v python2)"
+
 # Host in a deterministically chosen color
 RPR_SHOW_HOST=true # Set to false to disable host in rhs prompt
 function RPR_HOST() {
     local colors
     colors=(cyan green yellow red pink)
-    local index=$(python <<EOF
+    local index=$("$PROMPT_PYTHON" <<EOF
 import hashlib
 
 hash = int(hashlib.sha1('$(machine_name)'.encode('utf8')).hexdigest(), 16)
@@ -162,7 +164,7 @@ function parse_git_detached() {
 # Show different symbols as appropriate for various Git repository states
 function parse_git_state() {
     # Compose this value via multiple conditional appends.
-    local GIT_STATE=""
+    local GIT_STATE="" GIT_DIFF=""
 
     local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
     if [ "$NUM_AHEAD" -gt 0 ]; then
@@ -229,14 +231,86 @@ function PR_EXTRA() {
     # do nothing by default
 }
 
+# Show select exported environment variables
+
+_pr_var_list=()
+_vars_multiline=false
+
+function vshow() {
+    local v
+    for v in "$@"; do
+        if [[ "${v}" =~ '[A-Z_]+' ]]; then
+            if [[ ${_pr_var_list[(i)${v}]} -gt ${#_pr_var_list} ]]; then
+                _pr_var_list+=("${v}")
+            fi
+        fi
+    done
+}
+
+function vhide() {
+    local v
+    for v in "$@"; do
+        _pr_var_list[${_pr_var_list[(i)${v}]}]=()
+    done
+}
+
+function vmultiline() {
+    if $_vars_multiline; then
+        _vars_multiline=false
+    else
+        _vars_multiline=true
+    fi
+}
+
+function PR_VARS() {
+    local i v spc nl
+    if $_vars_multiline; then
+        spc=""
+        nl="\n"
+    else
+        spc=" "
+        nl=""
+    fi
+    for ((i=1; i <= ${#_pr_var_list}; i++)) do
+        local v=${_pr_var_list[i]}
+        if [[ -v "${v}" ]]; then
+            # if variable is set
+            if export | grep -Eq "^${v}="; then
+                # if exported, show regularly
+                printf '%s' "$spc%{$fg[cyan]%}${v}=${(P)${v}}%{$reset_color%}$nl"
+            else
+                # if not exported, show in red
+                printf '%s' "$spc%{$fg[red]%}${v}=${(P)${v}}%{$reset_color%}$nl"
+            fi
+        fi
+    done
+    # show project-specific vars
+    while read v; do
+        if [[ "${v}" =~ '[A-Z_]+' ]]; then
+            # valid environment variable
+            if [[ ${_pr_var_list[(i)${v}]} -gt ${#_pr_var_list} ]]; then
+                # not shown yet
+                if export | grep -Eq "^${v}="; then
+                    # exported
+                    printf '%s' "$spc%{$fg[cyan]%}${v}=${(P)${v}}%{$reset_color%}$nl"
+                fi
+            fi
+        fi
+    done < <(git exec cat .showvars 2>/dev/null)
+}
+
 # Prompt
 function PCMD() {
     if (( PROMPT_MODE == 0 )); then
-        echo "$(RPR_INFO) $(PR_EXTRA)$(PR_DIR) $(RCMD)\n$(PR_ERROR)$(PR_ARROW) " # space at the end
+        if $_vars_multiline; then
+            echo "$(PR_VARS)$(PR_EXTRA)$(PR_DIR) $(PR_ERROR)$(PR_ARROW) " # space at the end
+        else
+            echo "$(PR_EXTRA)$(PR_DIR)$(PR_VARS) $(PR_ERROR)$(PR_ARROW) " # space at the end
+        fi
     elif (( PROMPT_MODE == 1 )); then
-        echo "$(RPR_INFO) $(PR_EXTRA)$(PR_DIR 1) $(RCMD)\n$(PR_ERROR)$(PR_ARROW) " # space at the end
+        echo "$(PR_EXTRA)$(PR_DIR 1) $(PR_ERROR)$(PR_ARROW) " # space at the end
     else
-        echo "$(RPR_INFO) $(PR_EXTRA) $(RCMD)\n$(PR_ERROR)$(PR_ARROW) " # space at the end
+        echo "$(PR_EXTRA)$(PR_ERROR)$(PR_ARROW) " # space at the end
     fi
 }
 
@@ -250,7 +324,7 @@ function RPR_EXTRA() {
 # Right-hand prompt
 function RCMD() {
     if (( PROMPT_MODE == 0 )); then
-        echo "$(git_prompt_string)$(RPR_EXTRA)"
+        echo "$(RPR_INFO)$(git_prompt_string)$(RPR_EXTRA)"
     elif (( PROMPT_MODE <= 2 )); then
         echo "$(git_prompt_string)$(RPR_EXTRA)"
     else
@@ -258,35 +332,30 @@ function RCMD() {
     fi
 }
 
-ASYNC_PROC=0
 function precmd() {
-    function async() {
-        # save to temp file
-        # printf "%s" "$(RCMD)" > "/tmp/zsh_prompt_$$"
-        printf "%s" > "/tmp/zsh_prompt_$$"
+    typeset -g _PROMPT_ASYNC_FD
 
-        # signal parent
-        kill -s USR1 $$
-    }
-
-    # do not clear RPROMPT, let it persist
-
-    # kill child if necessary
-    if [[ "${ASYNC_PROC}" != 0 ]]; then
-        kill -s HUP $ASYNC_PROC >/dev/null 2>&1 || :
+    # close last fd, we don't care about the result anymore
+    if [[ -n "$_PROMPT_ASYNC_FD" ]] && { true <&$_PROMPT_ASYNC_FD } 2>/dev/null; then
+        exec {_PROMPT_ASYNC_FD}<&-
     fi
 
-    # start background computation
-    async &!
-    ASYNC_PROC=$!
+    # compute prompt in a background process
+    exec {_PROMPT_ASYNC_FD}< <(printf "%s" "$(RCMD)")
+
+    # when fd is readable, call response handler
+    zle -F "$_PROMPT_ASYNC_FD" async_prompt_complete
+
+    # do not clear RPROMPT, let it persist
 }
 
-function TRAPUSR1() {
-    # read from temp file
-    RPROMPT="$(cat /tmp/zsh_prompt_$$)"
+function async_prompt_complete() {
+    # read from fd
+    RPROMPT="$(<&$1)"
 
-    # reset proc number
-    ASYNC_PROC=0
+    # remove the handler and close the fd
+    zle -F "$1"
+    exec {1}<&-
 
     # redisplay
     zle && zle reset-prompt
