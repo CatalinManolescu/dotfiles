@@ -1,6 +1,6 @@
 [submodule "dotbot"]
 	path = .dotbot
-	url = https://github.com/catalinmanolescu/dotbot
+	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/pack/vendor/start/vim-colors-solarized
