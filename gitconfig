@@ -39,7 +39,7 @@
   tool = vimdiff
 
 [pull]
-  #ff = only
+  ff = only
 
 [mergetool]
   keepBackup = false
@@ -61,7 +61,7 @@
   useConfigOnly = true
   name = Catalin Manolescu
   email = cc.manolescu@gmail.com
-    
+
 [http]
   cookieFile = ~/.gitcookies
 
